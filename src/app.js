@@ -16,7 +16,14 @@ export class App {
   }
 
   initMiddleware() {
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: ["https://tal-vert.vercel.app", "*"],
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+      })
+    );
     this.app.use(express.json());
   }
 
