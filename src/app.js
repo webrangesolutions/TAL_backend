@@ -18,10 +18,10 @@ export class App {
   initMiddleware() {
     this.app.use(
       cors({
-        origin: ["https://tal-vert.vercel.app", "*"],
+        origin: "https://tal-vert.vercel.app", // Only allow this specific origin
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        preflightContinue: false,
-        optionsSuccessStatus: 204,
+        allowedHeaders: ["Content-Type", "Authorization"], // Include other headers if needed
+        credentials: true, // Allow cookies if needed
       })
     );
     this.app.use(express.json());
