@@ -19,7 +19,7 @@ export class App {
     // CORS middleware configuration
     this.app.use(
       cors({
-        origin: "https://tal-vert.vercel.app", // Allow only this origin
+        origin: ["https://tal-vert.vercel.app", "*"], // Allow only this origin
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
         allowedHeaders: ["Content-Type", "Authorization"], // Headers to allow
         credentials: true, // Enable cookies and credentials support
