@@ -16,24 +16,32 @@ export class App {
   }
 
   initMiddleware() {
+    // CORS middleware configuration
     this.app.use(
       cors({
-        origin: "https://tal-vert.vercel.app", // Only allow this specific origin
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        allowedHeaders: ["Content-Type", "Authorization"], // Include other headers if needed
-        credentials: true, // Allow cookies if needed
+        origin: "https://tal-vert.vercel.app", // Allow only this origin
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+        allowedHeaders: ["Content-Type", "Authorization"], // Headers to allow
+        credentials: true, // Enable cookies and credentials support
+        optionsSuccessStatus: 204, // Status for successful preflight responses
       })
     );
+
+    // Handle preflight `OPTIONS` requests for all routes
+    this.app.options("*", cors());
+
     this.app.use(express.json());
   }
 
   initRoutes() {
+    // Set up your main routes
     this.app.use("/", router);
   }
 
   createServer() {
+    // Start the server
     this.http.listen(this.PORT, () => {
-      console.log("Server started at port 8000");
+      console.log(`Server started at port ${this.PORT}`);
     });
   }
 }
